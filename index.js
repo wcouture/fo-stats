@@ -4,10 +4,17 @@ const app = express();
 app.use(express.json());
 const port = 3000;
 
+const data_path = "/home/ubuntu/fo-server/fo-stats/data/p_data.json";
 const player_data = load_player_data();
+
 
 app.get("/", (req, res) => {
   res.sendFile("pages/index.html", { root: __dirname });
+});
+
+app.get("/save", (req, res) => {
+  save_player_data();
+  res.send(JSON.stringify(player_data));
 });
 
 app.get("/get-player-data", (req, res) => {
@@ -76,7 +83,7 @@ function write_player_data(player) {
 }
 
 function load_player_data() {
-  fs.readFile("data/p_data.json", "utf8", (err, data) => {
+  fs.readFile(data_path, "utf8", (err, data) => {
     if (err) {
       console.error(err);
       return;
@@ -90,7 +97,7 @@ function load_player_data() {
 }
 
 function save_player_data() {
-  fs.writeFile("data/p_data.json", JSON.stringify(player_data), (err) => {
+  fs.writeFile(data_path, JSON.stringify(player_data), (err) => {
     if (err) console.log(err);
   });
 }
