@@ -1,3 +1,7 @@
-let form_data = document.forms[0];
+let submit_button = document.getElementById("submit-button");
+submit_button.onclick = submit;
 
-console.log(JSON.stringify(form_data));
+function submit() {
+ let form = document.forms[0];
+ console.log(`${form["confirm"].value} ${form[2].value}`);
+}
