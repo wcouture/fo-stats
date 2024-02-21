@@ -15,9 +15,9 @@
 <body>
   <div class="titlebar">Faceoff Stats</div>
 
-  <div class="content">
-    <form action="">
-      <p>Are you sure you want to clear data? (this is permanent)</p><br>
+  <div class="content" id="page-content">
+    <form id="confirm-form" action="">
+      <p class="content-header">Are you sure you want to clear data? (this is permanent)</p><br>
       <input type="radio" name="confirm" id="y-confirm" value="yes"></input>
       <label for="y-confirm">Yes</label><br>
       <input type="radio" name="confirm" id="n-confirm" value="no"></input>
@@ -25,7 +25,7 @@
 
       <br>
 
-      <p>Type "delete" below to clear data:</p><br>
+      <p class="content-header">Type "delete" below to clear data:</p><br>
       <input type="text" name="type-confirm" id="type-confirm"></input>
       <br>
 

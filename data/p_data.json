@@ -1,1 +1,10 @@
-{"players":[{"name":"Will Couture","number":"47","wins":6,"losses":1},{"name":"christian","number":"41","wins":0,"losses":0},{"name":"Danny","number":"33","wins":0,"losses":0}],"count":3}
+{
+	"players" : [
+		{"name":"Will C.", "number":47, "wins":26, "losses":27, "gb":9 },
+		{"name":"Christian G.", "number":41, "wins":13, "losses":10, "gb":4 },
+		{"name":"Parker G.", "number":27, "wins":4, "losses":3, "gb":1 },
+		{"name":"Danny F.", "number":33, "wins":4, "losses":3, "gb":1 },
+		{"name":"Ben E.", "number":47, "wins":5, "losses":8, "gb":3 }
+	],
+	"count" : 5
+}

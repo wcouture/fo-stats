@@ -12,6 +12,14 @@ app.get("/", (req, res) => {
   res.sendFile("pages/index.html", { root: __dirname });
 });
 
+app.get("/view", (req, res) => {
+  res.sendFile("pages/view.html", { root: __dirname });
+});
+
+app.get("/viewget-player-data", (req, res) => {
+  res.send(JSON.stringify(player_data));
+});
+
 app.get("/save", (req, res) => {
   save_player_data();
   res.send(JSON.stringify(player_data));
@@ -25,7 +33,23 @@ app.get("/new-player", (req, res) => {
   res.sendFile("pages/new-player.html", { root: __dirname });
 });
 
+app.get("/clear", (req, res) => {
+  res.sendFile("pages/clear.html", { root: __dirname });
+});
+
+app.post("/wipe", (req, res) => {
+  if (req.body.confirmed) {
+    player_data.players = [];
+    player_data.count = 0;
+    save_player_data();
+    res.send('{"status": "success"}');
+  }
+  else
+    res.send('{"status": "error"}');
+});
+
 app.get("/:dir/:file", (req, res) => {
+  console.log(JSON.stringify(req.params));
   if (_approved_directories.includes(req.params.dir) == false)
     res.send('{"status": "error"}');
   else
@@ -70,6 +94,22 @@ app.post("/add-loss", (req, res) => {
 
   player.losses = player.losses + 1;
   res.send('{"status" : "success"}');
+  save_player_data();
+});
+
+app.post("/add-gb", (req, res) => {
+  let index = player_data.player.findIndex(
+    (player) => player.number == req.body.player_num
+  );
+  let player = player_data.players[index];
+
+  if (player == null) {
+    res.send('{"status":"success"}');
+    return;
+  }
+
+  player.gb = player.gb + 1;
+  res.send('{"status":"success"}');
   save_player_data();
 });
 

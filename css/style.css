@@ -19,22 +19,29 @@ input {
 }
 
 label {
-  font-size: 20pt;
+  font-size: 18pt;
   font-weight: 400;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+table {
+  text-align: center;
 }
 
 .button {
   border: none;
   color: white;
-  padding: 16px 32px;
+  padding: 14px 28px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 12pt;
   margin: 4px 2px;
   transition-duration: 0.4s;
   cursor: pointer;
+  font-family: "Fjalla One", sans-serif;
+  font-style: normal;
+  font-weight: 400;
 }
 
 .stat-button {
@@ -47,7 +54,7 @@ label {
   font-size: 16px;
   transition-duration: 0.4s;
   cursor: pointer;
-  margin-bottom: 10pt;
+  margin-bottom: 2px;
   margin-left: 10pt;
 }
 
@@ -55,6 +62,7 @@ label {
   background-color: white;
   color: black; 
   border: 2px solid #782F40;
+  border-radius: 5px;
 }
 
 .button1:hover {
@@ -72,7 +80,7 @@ label {
 }
 
 .content{
-  background-color: #CEB888;
+  background-color: #782f40;/*#65676b;*/
   text-align: center;
   align-content: center;
   align-items: center;
@@ -81,7 +89,8 @@ label {
 }
 
 .content-header{
-  font-size: 22pt;
+  font-size: 20pt;
+  font-style: italic;
   font-weight: 800;
   color: black;
   font-family: "Arial" sans-serif;
@@ -103,21 +112,27 @@ label {
   text-align: center;
   align-items: horizontal;
   background-color: #ad9a76;
-  border: 10pt ridge #968564;
+  border: 5pt outset #968564;
+  border-radius: 10px;
   color: mintcream;
   margin-left: 15%;
   margin-bottom: 20px;
 }
 
 .player-label {
-  text-decoration: underline;
+  border-bottom: 4px groove #968564;
   font-size: 18pt;
   margin-bottom: -10pt;
+  margin-top: 10px;
   font-weight: 600;
+  font-family: "Fjalla One", sans-serif;
+  font-style: normal;
 }
 
 .detail {
-  margin-bottom: -1px;
+  margin-bottom: 10px;
+  font-family: "Fjalla One", sans-serif;
+  font-style: normal;
 }
 
 p {
