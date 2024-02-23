@@ -36,13 +36,13 @@ var imagePosition;
 var backgroundPosition, backgroundSize;
 
 function preload() {
-  startImg = loadImage("img/start.jpg");
+  startImg = loadImage("/img/start.jpg");
 
-  Images.push(loadImage('img/rightShoulder.jpg'));
-  Images.push(loadImage('img/frontExit.jpg'));
-  Images.push(loadImage('img/TTL.jpg'));
-  Images.push(loadImage('img/frontShovel.jpg'));
-  Images.push(loadImage('img/reverseShovel.jpg'));
+  Images.push(loadImage('/img/rightShoulder.jpg'));
+  Images.push(loadImage('/img/frontExit.jpg'));
+  Images.push(loadImage('/img/TTL.jpg'));
+  Images.push(loadImage('/img/frontShovel.jpg'));
+  Images.push(loadImage('/img/reverseShovel.jpg'));
 }
 
 function setup() {
