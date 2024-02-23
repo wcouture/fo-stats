@@ -6,7 +6,7 @@ const port = 3000;
 
 const data_path = "/home/ubuntu/fo-server/fo-stats/data/p_data.json";
 const player_data = load_player_data();
-const _approved_directories = ["pages", "data", "css", "scripts"];
+const _approved_directories = ["pages", "data", "css", "scripts", "apps"];
 
 app.get("/", (req, res) => {
   res.sendFile("pages/index.html", { root: __dirname });
@@ -14,6 +14,14 @@ app.get("/", (req, res) => {
 
 app.get("/view", (req, res) => {
   res.sendFile("pages/view.html", { root: __dirname });
+});
+
+app.get("/apps", (req, res) => {
+  res.sendFile("pages/apps.html", { root: __dirname });
+});
+
+app.get("/apps/:app", (req, res) => {
+  res.sendFile(`/apps/${req.params.app}/index.html`, { root:__dirname });
 });
 
 app.get("/viewget-player-data", (req, res) => {
@@ -41,7 +49,8 @@ app.post("/wipe", (req, res) => {
   if (req.body.confirmed) {
     player_data.players = [];
     player_data.count = 0;
-    save_player_data();
+    
+	  save_player_data();
     res.send('{"status": "success"}');
   }
   else
@@ -54,6 +63,13 @@ app.get("/:dir/:file", (req, res) => {
     res.send('{"status": "error"}');
   else
     res.sendFile(`${req.params.dir}/${req.params.file}`, { root: __dirname });
+});
+
+app.get("/:dir1/:dir2/:file", (req, res) => {
+  if (_approved_directories.includes(req.params.dir1) == false)
+    res.send('{"status":"error"}');
+  else
+    res.sendFile(`${req.params.dir1}/${req.params.dir2}/${req.params.file}`);
 });
 
 app.get("/admin", (req, res) => {
