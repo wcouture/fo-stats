@@ -26,6 +26,8 @@ label {
 
 table {
   text-align: center;
+  width: 100%;
+  /*color: #1f1f1f*/;
 }
 
 .button {
@@ -62,7 +64,10 @@ table {
   background-color: white;
   color: black; 
   border: 2px solid #782F40;
+  box-shadow: 1px 3px 4px rgba(0,0,0,0.6);
+  text-shadow: 0px 0px 0px #000;
   border-radius: 5px;
+
 }
 
 .button1:hover {
@@ -80,7 +85,8 @@ table {
 }
 
 .content{
-  background-color: #782f40;/*#65676b;*/
+  /*background-color: #782f40;*//*#65676b;*/
+  background: linear-gradient(#782f40, #000);
   text-align: center;
   align-content: center;
   align-items: center;
@@ -92,14 +98,12 @@ table {
   font-size: 20pt;
   font-style: italic;
   font-weight: 800;
-  color: black;
   font-family: "Arial" sans-serif;
 }
 
 .content-body{
   font-size: 16pt;
   font-weight: 500;
-  color: black;
   font-family: "Arial" sans-serif;
 }
 
@@ -111,12 +115,14 @@ table {
   width: 70%;
   text-align: center;
   align-items: horizontal;
-  background-color: #ad9a76;
-  border: 5pt outset #968564;
+  background: linear-gradient(#ad9a76, #f5e1bc);
+  border: 3pt outset #968564;
   border-radius: 10px;
   color: mintcream;
   margin-left: 15%;
   margin-bottom: 20px;
+  box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12);
+  text-shadow: 2px 2px 2px rgba(0,0,0,0.6);
 }
 
 .player-label {
@@ -127,6 +133,8 @@ table {
   font-weight: 600;
   font-family: "Fjalla One", sans-serif;
   font-style: normal;
+  color: mintcream;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
 }
 
 .detail {
