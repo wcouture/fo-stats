@@ -21,7 +21,7 @@ app.get("/apps", (req, res) => {
 });
 
 app.get("/apps/:app", (req, res) => {
-  res.sendFile(`/pages/${req.params/app}.html`, { root:__dirname });
+  res.sendFile(`/pages/${req.params.app}.html`, { root:__dirname });
 });
 
 app.get("/viewget-player-data", (req, res) => {
