@@ -36,13 +36,13 @@ var imagePosition;
 var backgroundPosition, backgroundSize;
 
 function preload() {
-  startImg = loadImage("images/start.jpg");
+  startImg = loadImage("http://fo-stats.willc-dev.net/images/start.jpg");
 
-  Images.push(loadImage('images/rightShoulder.jpg'));
-  Images.push(loadImage('images/frontExit.jpg'));
-  Images.push(loadImage('images/TTL.jpg'));
-  Images.push(loadImage('images/frontShovel.jpg'));
-  Images.push(loadImage('images/reverseShovel.jpg'));
+  Images.push(loadImage('http://fo-stats.willc-dev.net/images/rightShoulder.jpg'));
+  Images.push(loadImage('http://fo-stats.willc-dev.net/images/frontExit.jpg'));
+  Images.push(loadImage('http://fo-stats.willc-dev.net/images/TTL.jpg'));
+  Images.push(loadImage('http://fo-stats.willc-dev.net/images/frontShovel.jpg'));
+  Images.push(loadImage('http://fo-stats.willc-dev.net/images/reverseShovel.jpg'));
 }
 
 function setup() {

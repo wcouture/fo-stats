@@ -110,24 +110,16 @@ function mainMenu(){
 }
 
 function preload(){
-  logoImage = loadImage('img/FOSlogo.png');
-  backgroundImg = loadImage('img/backgroundImage.jpg');
+  logoImage = loadImage('http://fo-stats.willc-dev.net/img/FOSlogo.png');
+  backgroundImg = loadImage('http://fo-stats.willc-dev.net/img/backgroundImage.jpg');
 
   soundFormats('mp3');
-  down_a = loadSound('audio/DownCall.mp3');
-  set_a = loadSound('audio/SetCall.mp3');
-  whistle_a = loadSound('audio/Whistle.mp3');
+  down_a = loadSound('http://fo-stats.willc-dev.net/audio/DownCall.mp3');
+  set_a = loadSound('http://fo-stats.willc-dev.net/audio/SetCall.mp3');
+  whistle_a = loadSound('http://fo-stats.willc-dev.net/audio/Whistle.mp3');
 }
 
 function setup(){
-  let url = 'https://NodeJS-Testing.williamcouture1.repl.co/';
-  
-  httpGet(url, 'text', false, function(res){
-    response = res;
-    print(response);
-  }, function(res){
-    print(res);
-  });
   createCanvas(windowWidth, windowHeight);
   textAlign(CENTER,CENTER);
   
