@@ -110,13 +110,13 @@ function mainMenu(){
 }
 
 function preload(){
-  logoImage = loadImage('http://fo-stats.willc-dev.net/img/FOSlogo.png');
-  backgroundImg = loadImage('http://fo-stats.willc-dev.net/img/backgroundImage.jpg');
+  logoImage = loadImage('img/FOSlogo.png');
+  backgroundImg = loadImage('img/backgroundImage.jpg');
 
   soundFormats('mp3');
-  down_a = loadSound('http://fo-stats.willc-dev.net/audio/DownCall.mp3');
-  set_a = loadSound('http://fo-stats.willc-dev.net/audio/SetCall.mp3');
-  whistle_a = loadSound('http://fo-stats.willc-dev.net/audio/Whistle.mp3');
+  down_a = loadSound('audio/DownCall.mp3');
+  set_a = loadSound('audio/SetCall.mp3');
+  whistle_a = loadSound('audio/Whistle.mp3');
 }
 
 function setup(){
