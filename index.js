@@ -6,7 +6,7 @@ const port = 3000;
 
 const data_path = "/home/ubuntu/fo-server/fo-stats/data/p_data.json";
 const player_data = load_player_data();
-const _approved_directories = ["pages", "data", "css", "scripts", "img", "audio"];
+const _approved_directories = ["pages", "data", "css", "scripts", "img", "audio", "apps"];
 
 app.get("/", (req, res) => {
   res.sendFile("pages/index.html", { root: __dirname });
@@ -65,11 +65,11 @@ app.get("/:dir/:file", (req, res) => {
     res.sendFile(`${req.params.dir}/${req.params.file}`, { root: __dirname });
 });
 
-app.get("/:dir1/:dir2/:file", (req, res) => {
-  if (_approved_directories.includes(req.params.dir1) == false)
+app.get("/apps/:dir/:file", (req, res) => {
+  if (_approved_directories.includes(req.params.dir) == false)
     res.send('{"status":"error"}');
   else
-    res.sendFile(`${req.params.dir1}/${req.params.dir2}/${req.params.file}`);
+    res.sendFile(`apps/${req.params.dir2}/${req.params.file}`, { root: __dirname });
 });
 
 app.get("/admin", (req, res) => {
