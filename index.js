@@ -6,7 +6,7 @@ const port = 3000;
 
 const data_path = "/home/ubuntu/fo-server/fo-stats/data/p_data.json";
 const player_data = load_player_data();
-const _approved_directories = ["pages", "data", "css", "scripts", "apps"];
+const _approved_directories = ["pages", "data", "css", "scripts", "img", "audio"];
 
 app.get("/", (req, res) => {
   res.sendFile("pages/index.html", { root: __dirname });
