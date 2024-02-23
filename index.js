@@ -69,7 +69,7 @@ app.get("/apps/:dir/:file", (req, res) => {
   if (_approved_directories.includes(req.params.dir) == false)
     res.send('{"status":"error"}');
   else
-    res.sendFile(`apps/${req.params.dir2}/${req.params.file}`, { root: __dirname });
+    res.sendFile(`apps/${req.params.dir}/${req.params.file}`, { root: __dirname });
 });
 
 app.get("/admin", (req, res) => {
