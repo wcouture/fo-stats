@@ -18,6 +18,10 @@ input {
   border: 3px solid #782F40;
 }
 
+.stat-input {
+  width: 40px;
+}
+
 label {
   font-size: 18pt;
   font-weight: 400;

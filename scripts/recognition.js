@@ -17,7 +17,7 @@ var startTime, endTime, decisionTime, statsText;
 var reactionTimes = [], outcomes = [], choicesMade = [], scores = [];
 let choicesText = ["Forward Exit", "Right Shoulder Exit", "TTL Exit", "Front Shovel Counter", "Reverse Shovel Counter"];
 let outcomesText = ["Won the clamp, being front shoveled", "Won the clamp, getting reverse shoveled", "Won clamp, getting belly to helmeted", "Lost the clamp, opponent in plunger", "Lost the clamp, opponent in flat clamp"];
-
+let menu_text = " - Press Enter to Continue -\n\n\nKeys:\n1) Forward Exit | 2) Right Shoulder | 3) TTL\n4) Front Shovel | 3) Reverse Shovel"; 
 // Tracks phases of the faceoff calls and program phases
 var currPhase;
 var currState;
@@ -86,7 +86,7 @@ function draw() {
 function displayMenu() {
   textSize(28);
   textAlign(CENTER);
-  text("- Press enter to start -", WIDTH / 2, HEIGHT / 2);
+  text(menu_text, WIDTH / 2, HEIGHT / 2);
 
   if (keyIsPressed && keyCode == 13) {
     currState = State["Prewhistle"];

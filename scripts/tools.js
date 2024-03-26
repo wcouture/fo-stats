@@ -30,14 +30,32 @@ function populate_screen_dashboard(player_data) {
 
     let win_btn = document.createElement("a");
     win_btn.className = "stat-button button1";
+    let win_input = document.createElement("input");
+    win_input.type = "number";
+    win_input.className = "stat-input";
+    win_input.id = "win_input_" + curr_player.number;
+    win_input.value = 0;
+
     let loss_btn = document.createElement("a");
     loss_btn.className = "stat-button button1";
+    let loss_input = document.createElement("input");
+    loss_input.type = "number";
+    loss_input.className = "stat-input";
+    loss_input.id = "loss_input_" + curr_player.number;
+    loss_input.value = 0;
+	
     let gb_btn = document.createElement("a");
     gb_btn.className = "stat-button button1";
+    let gb_input = document.createElement("input");
+    gb_input.type = "number";
+    gb_input.className = "stat-input";
+    gb_input.id = "gb_input_" + curr_player.number;
+    gb_input.value = 0;
 
-    win_btn.text = "Add Win";
-    loss_btn.text = "Add Loss";
-    gb_btn.text = "GB";
+
+    win_btn.text = "Add Wins";
+    loss_btn.text = "Add Losses";
+    gb_btn.text = "Add GBs";
 
     win_btn.onclick = () => add_win(curr_player.number);
     loss_btn.onclick = () => add_loss(curr_player.number);
@@ -47,9 +65,12 @@ function populate_screen_dashboard(player_data) {
     player_card.appendChild(label);
     player_card.appendChild(detail);
     detail.appendChild(win_btn);
+    detail.appendChild(win_input);
     detail.appendChild(loss_btn);
+    detail.appendChild(loss_input);
     detail.appendChild(line_break);
     detail.appendChild(gb_btn);
+    detail.appendChild(gb_input);
     
     player_list.appendChild(divider);
   }
