@@ -5,23 +5,32 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>FO Stats</title>
-  <link href="http://fo-stats.willc-dev.net/css/style.css" rel="stylesheet" type="text/css" />
+  <link href="https://fo-stats.willc-dev.net/css/style.css" rel="stylesheet" type="text/css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Protest+Strike&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Fjalla+One&display=swap" rel="stylesheet">
-  <script src="http://fo-stats.willc-dev.net/scripts/tools.js"></script>
+  <script src="https://fo-stats.willc-dev.net/scripts/tools.js"></script>
+  <link rel="icon" type="image/x-icon" href="img/favicon.ico">
 </head>
 
 <body>
-  <div class="titlebar">Faceoff Stats</div>
+  <div class="titlebar">Faceoff Stats
+	<div class="unit-stats" id="unit_stats"></div>
+	</div>
 
   <div class="content">
+	  <div style="display:flex; margin-left:auto; margin-right:auto; max-width: 450px">
+		<a class="sort-item" onclick="return change_sort_mode(0)" href="#" id="0">Name</a>
+		<a class="sort-item" onclick="return change_sort_mode(1)" href="#" id="1">Jersey #</a>
+		<a class="sort-item" onclick="return change_sort_mode(2)" href="#" id="2">Win %</a>
+		<a class="sort-item" onclick="return change_sort_mode(3)" href="#" id="3">Total Wins</a>
+	  </div>
     <div class="content-body" id="page-content">
     </div>
   </div>
-  <script src="http://fo-stats.willc-dev.net/scripts/view.js">
+  <script src="https://fo-stats.willc-dev.net/scripts/view.js">
   </script>
 </body>
 

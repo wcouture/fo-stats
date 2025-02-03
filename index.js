@@ -7,15 +7,16 @@ const app = express();
 app.use(express.json());
 const port = 3000;
 
-const data_path = "/home/ubuntu/fo-server/fo-stats/data/p_data.json";
+const data_path = "/home/ubuntu/fo-site/fo-stats/data/p_data.json";
 const player_data = load_player_data();
-const _approved_directories = ["pages", "data", "css", "scripts", "img", "audio", "apps"];
+const _approved_directories = ["pages", "data", "css", "scripts", "img", "audio", "apps", "cards"];
 
 app.get("/", (req, res) => {
   res.sendFile("pages/index.html", { root: __dirname });
-});
+});	
 
 app.get("/view", (req, res) => {
+  console.log("accessing view page");
   res.sendFile("pages/view.html", { root: __dirname });
 });
 
@@ -75,6 +76,7 @@ app.get("/apps/:dir/:file", (req, res) => {
     res.sendFile(`apps/${req.params.dir}/${req.params.file}`, { root: __dirname });
 });
 
+
 app.get("/admin", (req, res) => {
   res.send(JSON.stringify(player_data));
 });
@@ -85,18 +87,17 @@ app.post("/add-player", (req, res) => {
 });
 
 app.post("/add-win", (req, res) => {
+
   let index = player_data.players.findIndex(
     (player) => player.number == req.body.player_num,
   );
   let player = player_data.players[index];
-
   if (player == null) {
     res.send('{"status" : "error"}');
     return;
   }
 
   let value = parseInt(req.body.value);
-
   player.wins = parseInt(player.wins) + value;
   res.send('{"status" : "success"}');
   save_player_data();
@@ -130,19 +131,15 @@ app.post("/add-gb", (req, res) => {
     return;
   }
   let value = parseInt(req.body.value);
-  console.log("GBs To Be Added: " + value);
   player.gb = parseInt(player.gb) + value;
   res.send('{"status":"success"}');
   save_player_data();
 });
 
-app.listen(port, () => {
-  console.log(`FO Stats listening on port ${port}`);
-});
-
 function write_player_data(player) {
   player.wins = 0;
   player.losses = 0;
+  player.gb = 0;
   player_data.players.push(player);
   player_data.count = player_data.players.length;
   save_player_data();
@@ -174,7 +171,7 @@ app.get("/sales", (req, res) => {
 });
 
 // Handles general get request
-app.get("sales/posts", (req, res) => {
+app.get("/sales/posts", (req, res) => {
   let result = { posts: [] };
   result.posts = JSON.parse(JSON.stringify(data.posts));
   for (var i = 0; i < result.posts.length; i++) {
@@ -183,7 +180,7 @@ app.get("sales/posts", (req, res) => {
   res.status(200).send(JSON.stringify(result));
 });
 
-app.get("sales/image", (req, res) => {
+app.get("/sales/image", (req, res) => {
   let inputs = req.query;
 
   console.log("Getting image for post: " + inputs.postId);
@@ -202,7 +199,7 @@ app.get("sales/image", (req, res) => {
   });
 });
 
-app.get("sales/posts/filtered", (req, res) => {
+app.get("/sales/posts/filtered", (req, res) => {
   let inputs = req.query;
 
   let priceMax = inputs.price_max;
@@ -225,7 +222,7 @@ app.get("sales/posts/filtered", (req, res) => {
   res.status(200).send(JSON.stringify(output));
 });
 
-app.get("sales/messages", (req, res) => {
+app.get("/sales/messages", (req, res) => {
   let inputs = req.query;
 
   let user = findUserFromId(inputs.authId);
@@ -236,7 +233,7 @@ app.get("sales/messages", (req, res) => {
 });
 
 // Register user account
-app.post('sales/register', (req, res) => {
+app.post('/sales/register', (req, res) => {
   let user = req.body.user;
   let pass = req.body.pass;
   let email = req.body.email;
@@ -250,7 +247,7 @@ app.post('sales/register', (req, res) => {
 });
 
 // Login in user account
-app.post('sales/login', (req, res) => {
+app.post('/sales/login', (req, res) => {
   console.log("Login request" + JSON.stringify(req.body));
   let pass = req.body.pass;
   let user = req.body.user;
@@ -260,7 +257,7 @@ app.post('sales/login', (req, res) => {
 });
 
 // Handles uploading new posts to the server database
-app.post('sales/upload', upload.single('file'), (req, res) => {
+app.post('/sales/upload', upload.single('file'), (req, res) => {
   // Access the uploaded file through req.file
   let newPost = {
     "title": req.body.title,
@@ -304,7 +301,7 @@ app.post('sales/upload', upload.single('file'), (req, res) => {
   res.status(200).send("Successfully uploaded post");
 });
 
-app.post('sales/send', (req, res) => {
+app.post('/sales/send', (req, res) => {
   let sender = req.body.sender;
   let recipient = req.body.recipient;
   let type = req.body.type;
@@ -329,7 +326,7 @@ app.post('sales/send', (req, res) => {
   res.send(JSON.stringify(result));
 })
 
-app.post('sales/delete/post', (req, res) => {
+app.post('/sales/delete/post', (req, res) => {
   let post_id = req.body.postId;
   let auth_id = req.body.authId;
 
@@ -351,7 +348,7 @@ app.post('sales/delete/post', (req, res) => {
   }
 });
 
-app.post('sales/delete/message', (req, res) => {
+app.post('/sales/delete/message', (req, res) => {
   let recipient = req.body.recipientId;
   let sender = req.body.senderId;
   let type = req.body.type;
@@ -369,7 +366,7 @@ app.post('sales/delete/message', (req, res) => {
 
 // Reads in saved data from file
 var data;
-fs.readFile('/home/ubuntu/fo-server/fo-stats/data/s_data.txt', 'utf8', (err, input) => {
+fs.readFile('/home/ubuntu/fo-site/fo-stats/data/s_data.txt', 'utf8', (err, input) => {
   if (err) {
     console.log(err);
     return;
@@ -380,6 +377,11 @@ fs.readFile('/home/ubuntu/fo-server/fo-stats/data/s_data.txt', 'utf8', (err, inp
   if (data.user_counter == -1)
     data.user_counter = data.users.length;
 });
+
+
+app.listen(port, () => {
+  console.log(`FO Stats listening on port ${port}`);
+}); 
 
 // Helper Functions -------------------------------------------------------------------------------------
 

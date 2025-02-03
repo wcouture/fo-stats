@@ -1,13 +1,103 @@
+var sort_mode = 0;
+var p_data = {};
+
+function compare_player_wins(player1, player2) {
+	return player2.wins - player1.wins;
+}
+
+function compare_player_names(player1, player2) {
+	if (player1.name <= player2.name)
+		return -1;
+	else
+		return 1;
+}
+
+function compare_player_number(player1, player2) {
+	return player1.number - player2.number;
+}
+
+function compare_player_percentages(player1, player2) {
+	let percent1 = player1.wins / (player1.wins + player1.losses);
+	let percent2 = player2.wins / (player2.wins + player2.losses);
+
+	return percent2 - percent1;
+}
+
+function change_sort_mode(new_mode) {
+	sort_mode = new_mode;
+
+	let page_content = document.getElementById("page-content");
+	page_content.innerHTML = "";
+	
+	populate_screen_public(p_data);
+	return sort_mode;
+}
+
+function get_sort_item_name(index) {
+	switch (index) {
+		case 0: return "Name";
+		case 1: return "Jersey #";
+		case 2: return "Win %";
+		case 3: return "Total Wins";
+	}
+	return "Name";
+}
+
+function set_sort_item_classes(item, index) {
+	if (sort_mode == index) {
+		item.className = "sort-item active";
+		item.innerText = "☰ " + get_sort_item_name(index);
+	}
+	else {
+		item.className = "sort-item";
+		item.innerText = get_sort_item_name(index);
+	}	
+}
+
+//let sort_items = document.getElementsByClassName("sort-item");
+//for (let i = 0; i < p_data.count; i++) 
+//	set_sort_item_classes(sort_items[i], i);
+
+function get_sorted_data(player_data) {
+	let sort_items = document.getElementsByClassName("sort-item");
+	for (let i = 0; i < sort_items.length; i++) 
+    	set_sort_item_classes(sort_items[i], i);
+
+	var sort_func;
+	switch(sort_mode) {
+		case 0: sort_func = compare_player_names; break;
+		case 1: sort_func = compare_player_number; break;
+		case 2: sort_func = compare_player_percentages; break;
+		case 3: sort_func = compare_player_wins; break;
+	}
+	return player_data.players.sort(sort_func);
+}
+
+
+function set_unit_stats(wins, losses) {
+	let total_percent = (wins + losses) > 0 ? wins / (wins + losses) * 100 : 0;
+	let unit_label = document.getElementById("unit_stats");
+	unit_label.innerHTML = `Unit: ${wins}/${(wins + losses)} = ${total_percent.toPrecision(4)}%`;
+}
+
 function populate_screen_dashboard(player_data) {
+  var total_wins = 0;
+  var total_losses = 0;
+
+  p_data = player_data;
   let player_num = player_data.count;
+  let players_sorted = get_sorted_data(player_data);
   for (let i = 0; i < player_num; i++) {
     let player_card = document.createElement("div");
     player_card.className = "content-body player-card";
-    let curr_player = player_data.players[i];
+    let curr_player = players_sorted[i];
 
     let wins = parseFloat(curr_player.wins);
     let losses = parseFloat(curr_player.losses);
     let win_p = wins + losses > 0 ? (wins / (wins + losses)) * 100 : 0;
+
+	total_wins += wins;
+	total_losses += losses;
 
     let line_break = document.createElement("br");
 
@@ -34,7 +124,7 @@ function populate_screen_dashboard(player_data) {
     win_input.type = "number";
     win_input.className = "stat-input";
     win_input.id = "win_input_" + curr_player.number;
-    win_input.value = 0;
+    win_input.value = 1;
 
     let loss_btn = document.createElement("a");
     loss_btn.className = "stat-button button1";
@@ -42,7 +132,7 @@ function populate_screen_dashboard(player_data) {
     loss_input.type = "number";
     loss_input.className = "stat-input";
     loss_input.id = "loss_input_" + curr_player.number;
-    loss_input.value = 0;
+    loss_input.value = 1;
 	
     let gb_btn = document.createElement("a");
     gb_btn.className = "stat-button button1";
@@ -50,7 +140,7 @@ function populate_screen_dashboard(player_data) {
     gb_input.type = "number";
     gb_input.className = "stat-input";
     gb_input.id = "gb_input_" + curr_player.number;
-    gb_input.value = 0;
+    gb_input.value = 1;
 
 
     win_btn.text = "Add Wins";
@@ -80,19 +170,28 @@ function populate_screen_dashboard(player_data) {
     no_player_label.textContent = "No players";
     player_list.appendChild(no_player_label);
   }
+  set_unit_stats(total_wins, total_losses);
 }
 
 function populate_screen_public(player_data) {
+  var total_wins = 0;
+  var total_losses = 0;
+
+  p_data = player_data;
   let player_list = document.getElementById("page-content");
   let player_num = player_data.count;
+  let players_sorted = get_sorted_data(player_data);
   for (let i = 0; i < player_num; i++) {
     let player_card = document.createElement("div");
     player_card.className = "content-body player-card";
-    let curr_player = player_data.players[i];
+    let curr_player = players_sorted[i];
 
     let wins = parseFloat(curr_player.wins);
     let losses = parseFloat(curr_player.losses);
     let win_p = wins + losses > 0 ? (wins / (wins + losses)) * 100 : 0;
+
+	total_wins += wins;
+	total_losses += losses;
 
     let label = document.createElement("p");
     let detail = document.createElement("p");
@@ -100,6 +199,7 @@ function populate_screen_public(player_data) {
 
     let label_data = curr_player.name + "  #" + curr_player.number.toString();
     let data = gen_table(curr_player);
+    /*
     /*
     var data = "<b>Wins:</b> " + curr_player.wins + "<br>";
     data += "<b>Losses:</b> " + curr_player.losses + "<br>";
@@ -121,6 +221,7 @@ function populate_screen_public(player_data) {
     no_player_label.textContent = "No players";
     player_list.appendChild(no_player_label);
   }
+  set_unit_stats(total_wins, total_losses);
 }
 
 
